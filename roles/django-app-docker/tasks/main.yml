@@ -1,0 +1,5 @@
+---
+- include_vars: vault.yml
+- include: user.yml
+- include: prepare_app.yml
+- include: docker_container.yml

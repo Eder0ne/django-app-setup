@@ -1,0 +1,21 @@
+---
+- name: Install docker packages
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - docker
+    - docker-python
+
+- name: Start docker engine
+  service:
+    name: "docker"
+    enabled: true
+    state: started
+
+- name: Create dedicated network
+  docker_network:
+    name: django-app-network
+    ipam_options:
+      subnet: '172.3.0.0/16'
+      iprange: '172.3.1.0/24'

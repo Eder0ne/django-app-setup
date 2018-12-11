@@ -1,0 +1,9 @@
+---
+- hosts: app-srvs
+  become: True
+  roles:
+    - common
+    - docker
+    - postgres-docker
+    - django-app-docker
+    - nginx

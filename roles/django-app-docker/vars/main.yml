@@ -1,0 +1,5 @@
+---
+django_app_home: '/opt/django/django-sample-app'
+django_default_conf_path: '/opt/django/django-sample-app/projectname/settings/default.py'
+django_wsgi_conf_path: '/opt/django/django-sample-app/projectname/wsgi.py'
+django_dockerfile_path: '/opt/django/django-sample-app/Dockerfile'

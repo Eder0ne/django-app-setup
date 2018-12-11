@@ -1,0 +1,17 @@
+FROM python:2.7
+
+RUN groupadd django
+RUN useradd -r -u 2000 -g django django
+WORKDIR /usr/src/app
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install uwsgi
+
+COPY . .
+
+
+EXPOSE 8000
+USER django
+
+CMD ["./docker-entrypoint.sh"]

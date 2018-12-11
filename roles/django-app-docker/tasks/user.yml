@@ -1,0 +1,9 @@
+---
+- name: Create app user
+  user:
+    name: "django"
+    create_home: yes
+    home: /opt/django
+    state: present
+    uid: 2000
+

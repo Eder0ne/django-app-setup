@@ -1,0 +1,27 @@
+- name: Copying Dockerfile
+  template:
+    src: Dockerfile.j2
+    dest: '{{ django_dockerfile_path }}'
+- name: Copying entry point
+  copy:
+    src: docker-entrypoint.sh
+    dest: '{{ django_app_home }}'
+    mode: 0755
+
+    
+- name: Build app docker image
+  docker_image:
+    name: django-app-image
+    path: '{{ django_app_home }}'
+
+- name: Run app container
+  docker_container:
+    name: django-app
+    image: django-app-image
+    state: started
+    ports:
+      - "127.0.0.1:8000:8000"
+    networks:
+      - name: django-app-network
+        aliases:
+          - django-app

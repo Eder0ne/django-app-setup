@@ -1,0 +1,16 @@
+---
+- name: Clone repo
+  git:
+    repo: 'https://github.com/kirpit/django-sample-app'
+    dest: /opt/django/django-sample-app
+    update: no
+
+- name: Configure wsgi.py 
+  template:
+    src: wsgi.py.j2
+    dest: '{{ django_wsgi_conf_path }}'
+
+- name: Configure django settings
+  template:
+    src: default.py.j2
+    dest: '{{ django_default_conf_path }}'

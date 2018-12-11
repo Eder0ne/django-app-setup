@@ -1,0 +1,32 @@
+---
+- name: Prepare postgres data directory
+  file:
+    path: /docker/volumes/postgres-docker/data
+    state: directory
+
+- name: Creating initdb.d directory
+  file:
+    path: /docker/volumes/postgres-docker/initdb.d
+    state: directory
+
+- name: Copy 01_django.sql
+  copy:
+    src: 01_django.sql
+    dest: /docker/volumes/postgres-docker/initdb.d/
+
+
+
+- name: Run postgres in container
+  docker_container:
+    name: pgsql96
+    image: "postgres:9.6"
+    state: started
+    volumes:
+      - "/docker/volumes/postgres-docker/data:/var/lib/postgresql/" 
+      - "/docker/volumes/postgres-docker/initdb.d:/docker-entrypoint-initdb.d/"
+    ports:
+      - "127.0.0.1:5432:5432"
+    networks:
+      - name: django-app-network
+        aliases:
+          - django-db

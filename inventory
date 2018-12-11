@@ -1,0 +1,9 @@
+[django-prj:children]
+app-srvs
+db-srvs
+
+[app-srvs]
+35.246.157.177
+
+[db-srvs]
+35.246.157.177
